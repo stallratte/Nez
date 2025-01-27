@@ -36,9 +36,9 @@ namespace Nez
 		}
 
 
-		public Graphics(BitmapFont font)
+		public Graphics(BitmapFont font, Batcher batcher)
 		{
-			Batcher = new Batcher(Core.GraphicsDevice);
+			Batcher = batcher;
 			BitmapFont = font;
 
 			// the bottom/right pixel is white on the default font so we'll use that for the pixelTexture
