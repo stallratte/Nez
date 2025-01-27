@@ -217,7 +217,16 @@ namespace Nez
 			// prep the default Graphics system
 			GraphicsDevice = base.GraphicsDevice;
 			var font = Content.Load<BitmapFont>("nez://Nez.Content.NezDefaultBMFont.xnb");
-			Graphics.Instance = new Graphics(font);
+			Graphics.Instance = new Graphics(font, CreateSpriteBatch(GraphicsDevice));
+		}
+
+		/// <summary>
+		/// Override this method to hook up a custom SpriteBatch.
+		/// </summary>
+		/// <param name="graphicsDevice">GraphicsDevice</param>
+		/// <returns>SpriteBatch</returns>
+		protected virtual Batcher CreateSpriteBatch(GraphicsDevice graphicsDevice) {
+			return new DefaultBatcher(graphicsDevice);
 		}
 
 		protected override void Update(GameTime gameTime)
