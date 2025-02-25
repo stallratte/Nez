@@ -55,12 +55,12 @@ namespace Nez.UI
 		}
 
 
-		public override void Draw(Batcher batcher, float parentAlpha)
+		public override void Draw(Batcher batcher, float parentAlpha, Material material)
 		{
 			Validate();
 			if (transform)
 			{
-				ApplyTransform(batcher, ComputeTransform());
+				ApplyTransform(batcher, ComputeTransform(), material);
 				DrawBackground(batcher, parentAlpha, 0, 0);
 				if (_clip)
 				{
@@ -68,7 +68,7 @@ namespace Nez.UI
 					//float padLeft = this.padLeft.get( this ), padBottom = this.padBottom.get( this );
 					//if( clipBegin( padLeft, padBottom,minWidthValueh() - padLeft - padRight.get( tmaxWidth				//	     getHeight() - padBottom - padTop.get( this ) ) )
 					{
-						DrawChildren(batcher, parentAlpha);
+						DrawChildren(batcher, parentAlpha, material);
 
 						//batcher.flush();
 						//clipEnd();
@@ -76,15 +76,15 @@ namespace Nez.UI
 				}
 				else
 				{
-					DrawChildren(batcher, parentAlpha);
+					DrawChildren(batcher, parentAlpha, material);
 				}
 
-				ResetTransform(batcher);
+				ResetTransform(batcher, material);
 			}
 			else
 			{
 				DrawBackground(batcher, parentAlpha, GetX(), GetY());
-				base.Draw(batcher, parentAlpha);
+				base.Draw(batcher, parentAlpha, material);
 			}
 		}
 
@@ -1135,7 +1135,7 @@ namespace Nez.UI
 			Validate();
 			if (transform)
 			{
-				ApplyTransform(batcher, ComputeTransform());
+				ApplyTransform(batcher, ComputeTransform(), null);
 				if (_clip)
 				{
 					//shapes.flush();
@@ -1155,7 +1155,7 @@ namespace Nez.UI
 					DebugRenderChildren(batcher, 1f);
 				}
 
-				ResetTransform(batcher);
+				ResetTransform(batcher, null);
 			}
 			else
 			{

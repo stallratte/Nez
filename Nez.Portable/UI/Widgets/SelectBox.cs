@@ -74,7 +74,7 @@ namespace Nez.UI
 		}
 
 
-		public override void Draw(Batcher batcher, float parentAlpha)
+		public override void Draw(Batcher batcher, float parentAlpha, Material material)
 		{
 			Validate();
 

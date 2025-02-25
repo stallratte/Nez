@@ -184,19 +184,19 @@ namespace Nez.UI
 		}
 
 
-		public override void Draw(Batcher batcher, float parentAlpha)
+		public override void Draw(Batcher batcher, float parentAlpha, Material material)
 		{
 			Validate();
 
 			if (transform)
-				ApplyTransform(batcher, ComputeTransform());
+				ApplyTransform(batcher, ComputeTransform(), material);
 			if (_firstWidget != null && _firstWidget.IsVisible())
 			{
 				var scissor = ScissorStack.CalculateScissors(_stage?.Camera, batcher.TransformMatrix, _firstWidgetBounds);
 				if (ScissorStack.PushScissors(scissor))
 				{
 					batcher.EnableScissorTest(true);
-					_firstWidget.Draw(batcher, parentAlpha * color.A);
+					_firstWidget.Draw(batcher, parentAlpha * color.A, material);
 					batcher.EnableScissorTest(false);
 					ScissorStack.PopScissors();
 				}
@@ -209,7 +209,7 @@ namespace Nez.UI
 				if (ScissorStack.PushScissors(scissor))
 				{
 					batcher.EnableScissorTest(true);
-					_secondWidget.Draw(batcher, parentAlpha * color.A);
+					_secondWidget.Draw(batcher, parentAlpha * color.A, material);
 					batcher.EnableScissorTest(false);
 					ScissorStack.PopScissors();
 				}
@@ -219,7 +219,7 @@ namespace Nez.UI
 				ColorExt.Create(color, (int)(color.A * parentAlpha)));
 
 			if (transform)
-				ResetTransform(batcher);
+				ResetTransform(batcher, material);
 		}
 
 

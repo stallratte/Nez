@@ -40,7 +40,7 @@ namespace Nez.UI
 		/// </summary>
 		/// <param name="batcher">Batcher.</param>
 		/// <param name="parentAlpha">Parent alpha.</param>
-		public virtual void Draw(Batcher batcher, float parentAlpha) => Validate();
+		public virtual void Draw(Batcher batcher, float parentAlpha, Material material) => Validate();
 
 		protected virtual void SizeChanged() => Invalidate();
 

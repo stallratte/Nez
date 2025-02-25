@@ -591,7 +591,7 @@ namespace Nez.UI
 
 		#region Drawing
 
-		public override void Draw(Batcher batcher, float parentAlpha)
+		public override void Draw(Batcher batcher, float parentAlpha, Material material)
 		{
 			var font = style.Font;
 			var fontColor = (disabled && style.DisabledFontColor.HasValue)

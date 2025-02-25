@@ -146,7 +146,7 @@ namespace Nez.UI
 		}
 
 
-		public override void Draw(Batcher batcher, float parentAlpha)
+		public override void Draw(Batcher batcher, float parentAlpha, Material material)
 		{
 			if (!IsVisible())
 				return;
@@ -154,16 +154,16 @@ namespace Nez.UI
 			Validate();
 
 			if (transform)
-				ApplyTransform(batcher, ComputeTransform());
+				ApplyTransform(batcher, ComputeTransform(), material);
 
-			DrawChildren(batcher, parentAlpha);
+			DrawChildren(batcher, parentAlpha, material);
 
 			if (transform)
-				ResetTransform(batcher);
+				ResetTransform(batcher, material);
 		}
 
 
-		public void DrawChildren(Batcher batcher, float parentAlpha)
+		public void DrawChildren(Batcher batcher, float parentAlpha, Material material)
 		{
 			parentAlpha *= color.A / 255.0f;
 
@@ -185,7 +185,7 @@ namespace Nez.UI
 						if (cx <= cullRight && cy <= cullTop && cx + child.width >= cullLeft &&
 							cy + child.height >= cullBottom)
 						{
-							child.Draw(batcher, parentAlpha);
+							child.Draw(batcher, parentAlpha, material);
 						}
 					}
 				}
@@ -205,7 +205,7 @@ namespace Nez.UI
 						{
 							child.x = cx + offsetX;
 							child.y = cy + offsetY;
-							child.Draw(batcher, parentAlpha);
+							child.Draw(batcher, parentAlpha, material);
 							child.x = cx;
 							child.y = cy;
 						}
@@ -225,7 +225,7 @@ namespace Nez.UI
 						var child = children[i];
 						if (!child.IsVisible()) continue;
 
-						child.Draw(batcher, parentAlpha);
+						child.Draw(batcher, parentAlpha, material);
 					}
 				}
 				else
@@ -242,7 +242,7 @@ namespace Nez.UI
 						float cx = child.x, cy = child.y;
 						child.x = cx + offsetX;
 						child.y = cy + offsetY;
-						child.Draw(batcher, parentAlpha);
+						child.Draw(batcher, parentAlpha, material);
 						child.x = cx;
 						child.y = cy;
 					}
@@ -257,12 +257,12 @@ namespace Nez.UI
 		public override void DebugRender(Batcher batcher)
 		{
 			if (transform)
-				ApplyTransform(batcher, ComputeTransform());
+				ApplyTransform(batcher, ComputeTransform(), null);
 
 			DebugRenderChildren(batcher, 1f);
 
 			if (transform)
-				ResetTransform(batcher);
+				ResetTransform(batcher, null);
 
 			if (this is Button)
 				base.DebugRender(batcher);
@@ -354,11 +354,17 @@ namespace Nez.UI
 		/// </summary>
 		/// <param name="batcher">Batcher.</param>
 		/// <param name="transform">Transform.</param>
-		protected void ApplyTransform(Batcher batcher, Matrix transform)
+		protected void ApplyTransform(Batcher batcher, Matrix transform, Material material)
 		{
 			_previousBatcherTransform = batcher.TransformMatrix;
 			batcher.End();
-			batcher.Begin(transform);
+
+			if (material != null) {
+				batcher.Begin(material, transform);
+			}
+			else {
+				batcher.Begin(transform);
+			}
 		}
 
 
@@ -367,10 +373,16 @@ namespace Nez.UI
 		/// be flushed
 		/// </summary>
 		/// <param name="batch">Batch.</param>
-		protected void ResetTransform(Batcher batcher)
+		protected void ResetTransform(Batcher batcher, Material material)
 		{
 			batcher.End();
-			batcher.Begin(_previousBatcherTransform);
+
+			if (material != null) {
+				batcher.Begin(material, _previousBatcherTransform);
+			}
+			else {
+				batcher.Begin(_previousBatcherTransform);
+			}
 		}
 
 

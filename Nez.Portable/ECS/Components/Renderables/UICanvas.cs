@@ -59,7 +59,7 @@ namespace Nez
 
 		public override void Render(Batcher batcher, Camera camera)
 		{
-			Stage.Render(batcher, camera);
+			Stage.Render(batcher, camera, Material);
 		}
 
 

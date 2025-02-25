@@ -125,12 +125,12 @@ namespace Nez.UI
 		}
 
 
-		public override void Draw(Batcher batcher, float parentAlpha)
+		public override void Draw(Batcher batcher, float parentAlpha, Material material)
 		{
 			Validate();
 			if (transform)
 			{
-				ApplyTransform(batcher, ComputeTransform());
+				ApplyTransform(batcher, ComputeTransform(), material);
 				DrawBackground(batcher, parentAlpha, 0, 0);
 
 				if (Clip)
@@ -140,21 +140,21 @@ namespace Nez.UI
 					if (ClipBegin(batcher, padLeft, padBottom, GetWidth() - padLeft - _padRight.Get(this),
 						GetHeight() - padBottom - _padTop.Get(this)))
 					{
-						DrawChildren(batcher, parentAlpha);
+						DrawChildren(batcher, parentAlpha, material);
 						ClipEnd(batcher);
 					}
 				}
 				else
 				{
-					DrawChildren(batcher, parentAlpha);
+					DrawChildren(batcher, parentAlpha, material);
 				}
 
-				ResetTransform(batcher);
+				ResetTransform(batcher, material);
 			}
 			else
 			{
 				DrawBackground(batcher, parentAlpha, x, y);
-				base.Draw(batcher, parentAlpha);
+				base.Draw(batcher, parentAlpha, material);
 			}
 		}
 

@@ -176,13 +176,13 @@ namespace Nez.UI.Containers
 			return y;
 		}
 
-		public override void Draw(Batcher batcher, float parentAlpha)
+		public override void Draw(Batcher batcher, float parentAlpha, Material material)
 		{
 			DrawBackground(batcher, parentAlpha);
 			var color = GetColor();
 			color = new Color(color.R, color.G, color.B, color.A * parentAlpha);
 			Draw(batcher, rootNodes, leftColumnWidth, color);
-			base.Draw(batcher, parentAlpha);
+			base.Draw(batcher, parentAlpha, material);
 		}
 
 		protected void DrawBackground(Batcher batcher, float parentAlpha)

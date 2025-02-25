@@ -255,7 +255,7 @@ namespace Nez.UI
 		}
 
 
-		public override void Draw(Batcher batcher, float parentAlpha)
+		public override void Draw(Batcher batcher, float parentAlpha, Material material)
 		{
 			KeepWithinStage();
 
@@ -267,7 +267,7 @@ namespace Nez.UI
 					GetX() + stageSize.X, GetY() + stageSize.Y);
 			}
 
-			base.Draw(batcher, parentAlpha);
+			base.Draw(batcher, parentAlpha, material);
 		}
 
 

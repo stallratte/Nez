@@ -68,13 +68,13 @@ namespace Nez.UI
 		}
 
 
-		public void Render(Batcher batcher, Camera camera)
+		public void Render(Batcher batcher, Camera camera, Material material)
 		{
 			if (!root.IsVisible())
 				return;
 
 			Camera = camera;
-			root.Draw(batcher, 1f);
+			root.Draw(batcher, 1f, material);
 
 			if (Debug)
 			{

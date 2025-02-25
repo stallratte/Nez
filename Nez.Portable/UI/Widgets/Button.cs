@@ -330,7 +330,7 @@ namespace Nez.UI
 		public bool GetDisabled() => _isDisabled;
 
 
-		public override void Draw(Batcher batcher, float parentAlpha)
+		public override void Draw(Batcher batcher, float parentAlpha, Material material)
 		{
 			Validate();
 
@@ -366,7 +366,7 @@ namespace Nez.UI
 			for (var i = 0; i < children.Count; i++)
 				children[i].MoveBy(offsetX, offsetY);
 
-			base.Draw(batcher, parentAlpha);
+			base.Draw(batcher, parentAlpha, material);
 
 			for (int i = 0; i < children.Count; i++)
 				children[i].MoveBy(-offsetX, -offsetY);

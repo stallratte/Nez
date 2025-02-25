@@ -82,7 +82,7 @@ namespace Nez.UI
 		}
 
 
-		public override void Draw(Batcher batcher, float parentAlpha)
+		public override void Draw(Batcher batcher, float parentAlpha, Material material)
 		{
 			UpdateImage();
 
@@ -103,7 +103,7 @@ namespace Nez.UI
 			if (fontColor.HasValue)
 				label.GetStyle().FontColor = fontColor.Value;
 
-			base.Draw(batcher, parentAlpha);
+			base.Draw(batcher, parentAlpha, material);
 		}
 
 

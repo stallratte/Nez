@@ -181,7 +181,7 @@ namespace Nez.UI
 		}
 
 
-		public override void Draw(Batcher batcher, float parentAlpha)
+		public override void Draw(Batcher batcher, float parentAlpha, Material material)
 		{
 			var knob = GetKnobDrawable();
 			var bg = (Disabled && style.DisabledBackground != null) ? style.DisabledBackground : style.Background;

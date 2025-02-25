@@ -83,7 +83,7 @@ namespace Nez.UI
 		#endregion
 
 
-		public override void Draw(Batcher batcher, float parentAlpha)
+		public override void Draw(Batcher batcher, float parentAlpha, Material material)
 		{
 			Validate();
 
