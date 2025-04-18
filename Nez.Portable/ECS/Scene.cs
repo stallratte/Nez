@@ -204,10 +204,10 @@ namespace Nez
 		RenderTarget2D _destinationRenderTarget;
 		Action<Texture2D> _screenshotRequestCallback;
 
-		internal readonly FastList<SceneComponent> _sceneComponents = new FastList<SceneComponent>();
-		internal readonly FastList<Renderer> _renderers = new FastList<Renderer>();
-		internal readonly FastList<Renderer> _afterPostProcessorRenderers = new FastList<Renderer>();
-		internal readonly FastList<PostProcessor> _postProcessors = new FastList<PostProcessor>();
+		public readonly FastList<SceneComponent> _sceneComponents = new FastList<SceneComponent>();
+		public readonly FastList<Renderer> _renderers = new FastList<Renderer>();
+		public readonly FastList<Renderer> _afterPostProcessorRenderers = new FastList<Renderer>();
+		public readonly FastList<PostProcessor> _postProcessors = new FastList<PostProcessor>();
 		bool _didSceneBegin;
 
 

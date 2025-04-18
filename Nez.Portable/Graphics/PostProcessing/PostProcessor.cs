@@ -38,7 +38,7 @@ namespace Nez
 		/// <summary>
 		/// the Scene this PostProcessor is attached to or null
 		/// </summary>
-		protected internal Scene _scene;
+		public Scene _scene;
 
 
 		public PostProcessor(int executionOrder, Effect effect = null)
